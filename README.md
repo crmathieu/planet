@@ -189,7 +189,7 @@ Users member of the group _{groupname}_ get their _groups_ field updated to refl
 ## Implementation details   
 The API is designed to support multiple repository types without requiring to change the unit test code. Since the data must be persistent, the assumption that:
 
-_The app doesn't need to scale and there will always be a unique instance running at any given time_
+**_The app doesn't need to scale and there will always be a unique instance running at any given time_**
 
 was made for simplicity sake due to the local nature of datastore implemented. The use of systems such as a database or a key/pair service would aleviate this restriction.
 
