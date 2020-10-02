@@ -23,7 +23,7 @@ Waiting to shutdown
 These messages mean that the SIGTERM and SIGINT signals have been captured to detect a shutdown and an appropriate action (save data to local file) will be taken when this happens.
 
 
-## testing the app
+## Testing the app
 In one terminal, run the app. 
 In a second terminal, go to the _api_ subfolder
 type
