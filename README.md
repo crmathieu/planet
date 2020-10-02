@@ -1,14 +1,15 @@
 # Test assignment
 
 ## Installation 
-- clone this repo
-- type
+clone this repo
+
+type
 ```text
 > go build
 ```
 
 ## Running the app
-- type
+type
 ```text
 > ./planet
 ```
@@ -22,8 +23,8 @@ It means that the app can capture the SIGTERM and SIGINT signals to detect a shu
 
 
 ## testing the app
-- go to the _api_ subfolder
-- type
+go to the _api_ subfolder
+type
 ```
 > go test -v
 ``` 
