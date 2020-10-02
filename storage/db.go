@@ -14,27 +14,9 @@ type DatabaseRepo struct {
 
 var DBRepo DatabaseRepo
 
-func (db DatabaseRepo)Init() error {
+func (db DBStorage)Init() error {
 	return nil
 }
-func (db DatabaseRepo)UserGet(w http.ResponseWriter, r *http.Request, userid string)  {
-}
-func (db DatabaseRepo)UserAdd(w http.ResponseWriter, r *http.Request, user *data.USER)  {
-}
-func (db DatabaseRepo)UserDelete(w http.ResponseWriter, r *http.Request, userid string)  {
-}
-func (db DatabaseRepo)UserUpdate(w http.ResponseWriter, r *http.Request, userid string, user *data.USER)  {
-}
-func (db DatabaseRepo)GroupGet(w http.ResponseWriter, r *http.Request, groupname string)  {
-}
-func (db DatabaseRepo)GroupAdd(w http.ResponseWriter, r *http.Request, group *data.GROUP)  {
-}
-func (db DatabaseRepo)GroupDelete(w http.ResponseWriter, r *http.Request, groupname string)  {
-}
-func (db DatabaseRepo)GroupUpdate(w http.ResponseWriter, r *http.Request, groupname string, grpupd *data.GROUPUPD)  {
-}
-
-/*
 func (db DBStorage)UserGet(w http.ResponseWriter, r *http.Request, userid string)  {
 }
 func (db DBStorage)UserAdd(w http.ResponseWriter, r *http.Request, user *data.USER)  {
@@ -51,4 +33,3 @@ func (db DBStorage)GroupDelete(w http.ResponseWriter, r *http.Request, groupname
 }
 func (db DBStorage)GroupUpdate(w http.ResponseWriter, r *http.Request, groupname string, grpupd *data.GROUPUPD)  {
 }
-*/

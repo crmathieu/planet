@@ -8,12 +8,11 @@ import (
 	"strings"
 )
 
-/*const (
-	GET    = "GET"
-	POST   = "POST"
-	PUT    = "PUT"
-	DELETE = "DELETE"
-)*/
+const (
+	JSON = "JSON"
+	DB   = "DB"
+)
+const TARGET_STORAGE = JSON
 
 var routes = map[string]func(w http.ResponseWriter, r *http.Request, id string) {
 	"users":    controller.UsersEndpoints,
@@ -41,7 +40,7 @@ func router(w http.ResponseWriter, r *http.Request) {
 }
 
 func init() {
-	api.InitStorage("JSON")
+	api.InitStorage(TARGET_STORAGE)
 }
 
 func main() {
@@ -52,6 +51,6 @@ func main() {
 	CatchSignals(&http.Server{Addr: ":80", Handler: nil})
 
 	// storage specific close
-	api.CloseStorage("JSON")
+	api.CloseStorage(TARGET_STORAGE)
 }
 

@@ -23,17 +23,11 @@ type JsonRepo struct {
 
 var JRepo JsonRepo
 
-func (js JsonRepo) Init() error {
+// Init -----------------------------------------------------------------------
+// json storage specific initialization
+// ----------------------------------------------------------------------------
+func (js JsonStorage) Init() error {
 
-//func (jr JsonRepo) Init() error {
-/*	JsonRepo.Repo = map[string]*data.USER{"johnf": {"john","flemming", "johnf", []string{"users"}},
-										 "joes": {"joseph","smith", "joes", []string{"users","admin"}},}
-
-	JsonRepo.Repogrp = map[string][]string{
-		"users":[]string{"johnf","joes"},
-		"admin":[]string{"joes"},
-	}
-*/
 	if !loadRepoFromDisk() {
 		JRepo.js = JsonStorage{}
 	}
@@ -116,7 +110,7 @@ func removeItem(groupname, userid string) {
 // UserGet --------------------------------------------------------------------
 // Get method - Returns the matching user record or 404
 // ----------------------------------------------------------------------------
-func (jr JsonRepo) UserGet(w http.ResponseWriter, r *http.Request, userid string) {
+func (js JsonStorage) UserGet(w http.ResponseWriter, r *http.Request, userid string) {
 	if userid != "" {
 		JRepo.uLock.RLock()
 		defer JRepo.uLock.RUnlock() 
@@ -139,7 +133,7 @@ func (jr JsonRepo) UserGet(w http.ResponseWriter, r *http.Request, userid string
 // UserAdd --------------------------------------------------------------------
 // POST method - creates a new user record. Body contains USER information
 // -----------------------------------------------------------------------	-----
-func (jr JsonRepo) UserAdd(w http.ResponseWriter, r *http.Request, user *data.USER) {
+func (js JsonStorage) UserAdd(w http.ResponseWriter, r *http.Request, user *data.USER) {
 
 	JRepo.uLock.Lock()
 	defer JRepo.uLock.Unlock() 
@@ -158,7 +152,7 @@ func (jr JsonRepo) UserAdd(w http.ResponseWriter, r *http.Request, user *data.US
 // UserDelete -----------------------------------------------------------------
 // DELETE method - deletes an existing user record
 // ----------------------------------------------------------------------------
-func (jr JsonRepo) UserDelete(w http.ResponseWriter, r *http.Request, userid string)  {
+func (js JsonStorage) UserDelete(w http.ResponseWriter, r *http.Request, userid string)  {
 	if userid != "" {
 		JRepo.uLock.Lock()
 		defer JRepo.uLock.Unlock() 
@@ -180,7 +174,7 @@ func (jr JsonRepo) UserDelete(w http.ResponseWriter, r *http.Request, userid str
 // UserUpdate -----------------------------------------------------------------
 // PUT method - updates an existing user record
 // ----------------------------------------------------------------------------
-func (jr JsonRepo) UserUpdate(w http.ResponseWriter, r *http.Request, userid string, user *data.USER)  {
+func (js JsonStorage) UserUpdate(w http.ResponseWriter, r *http.Request, userid string, user *data.USER)  {
 
 	JRepo.uLock.Lock()
 	defer JRepo.uLock.Unlock() 
@@ -203,7 +197,7 @@ func (jr JsonRepo) UserUpdate(w http.ResponseWriter, r *http.Request, userid str
 // GroupGet -------------------------------------------------------------------
 // GET method - returns the group's members list
 // ----------------------------------------------------------------------------
-func (jr JsonRepo) GroupGet(w http.ResponseWriter, r *http.Request, groupname string)  {
+func (js JsonStorage) GroupGet(w http.ResponseWriter, r *http.Request, groupname string)  {
 	if groupname != "" {
 		JRepo.uLock.RLock()
 		defer JRepo.uLock.RUnlock() 
@@ -225,7 +219,7 @@ func (jr JsonRepo) GroupGet(w http.ResponseWriter, r *http.Request, groupname st
 // GroupAdd -------------------------------------------------------------------
 // POST method - Creates an empty group
 // ----------------------------------------------------------------------------
-func (jr JsonRepo) GroupAdd(w http.ResponseWriter, r *http.Request, group *data.GROUP)  {
+func (js JsonStorage) GroupAdd(w http.ResponseWriter, r *http.Request, group *data.GROUP)  {
 	if group.Gname != "" {
 		JRepo.uLock.Lock()
 		defer JRepo.uLock.Unlock() 
@@ -243,7 +237,7 @@ func (jr JsonRepo) GroupAdd(w http.ResponseWriter, r *http.Request, group *data.
 // GroupDelete ----------------------------------------------------------------
 // DELETED method - removes group and references to it
 // ----------------------------------------------------------------------------
-func (jr JsonRepo) GroupDelete(w http.ResponseWriter, r *http.Request, groupname string)  {
+func (js JsonStorage) GroupDelete(w http.ResponseWriter, r *http.Request, groupname string)  {
 	if groupname != "" {
 		JRepo.uLock.Lock()
 		defer JRepo.uLock.Unlock() 
@@ -292,7 +286,7 @@ func addReference(userid, groupname string) {
 // PUT method - updates a group members list. New list is in body as array of
 //              strings
 // ----------------------------------------------------------------------------
-func (jr JsonRepo)GroupUpdate(w http.ResponseWriter, r *http.Request, groupname string, grpupd *data.GROUPUPD)  {
+func (js JsonStorage)GroupUpdate(w http.ResponseWriter, r *http.Request, groupname string, grpupd *data.GROUPUPD)  {
 	if groupname != "" {
 		JRepo.uLock.Lock()
 		defer JRepo.uLock.Unlock() 

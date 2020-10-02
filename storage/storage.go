@@ -25,8 +25,8 @@ type UserStorage interface {
 func OpenStore(storageType string) (*UserStorage, error) {
 	var store UserStorage
 	switch storageType {
-		case "JSON": store = JsonRepo{};break
-		case "DB": store = DatabaseRepo{};break
+		case "JSON": store = JsonStorage{};break
+		case "DB": store = DBStorage{};break
 		default: return nil, errors.New("Unknown storage type")
 	}
 	store.Init()
