@@ -48,7 +48,7 @@ type
 > go test -v
 ``` 
 
-Current tests only consider http status to determine whether a call succeeded or failed as expected. A deeper testing could be accomplished for endpoints returning a payload by also comparing their payload to what is expected. Due to time constraints to prepare scenarios that reflect a thorough testing, these features were left on the sideline.
+Current tests only consider http status to determine whether a call succeeded or failed as expected. A deeper testing could be accomplished for endpoints returning a payload by also comparing their payload to what is expected. Due to time constraints to prepare scenarios that reflect a thorough testing, these features were left off.
 
 
 ## Introduction
