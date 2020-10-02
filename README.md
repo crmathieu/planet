@@ -96,7 +96,7 @@ These endpoints use **/groups** as a name
 
 
 **GET /groups/{groupname}**
-Returns a JSON list of user ids containing the members of that group. 
+Returns a JSON list of the members of that group. 
 
 ```text
 GET /groups/admin
