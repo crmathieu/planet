@@ -13,7 +13,7 @@ The rationale for this implementation is that it doesn't require to install and 
 
 
 ## Other assumptions
-When a new user is added or updated, it is assumed that the payload is valid; more specifically, the values specifed in the _groups_ field are valid (they refer to existing group names).
+When a user is added or updated, it is assumed that the payload is valid; more specifically, the values specifed in the _groups_ field are valid (they refer to existing group names).
 
 
 
