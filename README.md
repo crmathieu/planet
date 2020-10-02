@@ -3,7 +3,7 @@
 ## Installation 
 clone this repo
 
-type
+from the _planet_ folder, type
 ```text
 > go build
 ```
