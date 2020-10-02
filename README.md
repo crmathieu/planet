@@ -29,9 +29,10 @@ type
 > go test -v
 ``` 
 
+## Introduction
 
-Implements a REST service used to store, fetch, and update user records. 
-A user record can be represented in a JSON hash like so: 
+This app implements a REST service used to store, fetch, and update user records. 
+A user record can be represented in a JSON hash as follows: 
 
 ```json
 {     
