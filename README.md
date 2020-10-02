@@ -1,5 +1,19 @@
 # Test assignment
 
+## Implementation details   
+The API is designed to support multiple data storage types. Since the data must be persistent, the assumption that:
+
+**_The app doesn't need to scale and there will always be a unique instance running at any given time_**
+
+was made for simplicity sake due to the local nature of datastore that is implemented. The use of systems such as a database or a key/pair service would alleviate this restriction.
+
+In this implementation, users and groups are kept in memory through a hash table (map).
+
+The data stays in memory as long as the app runs and is only saved at shutdown in a local file after being serialized. When the app restarts, It reloads the data from the saved file.
+
+The rationale for this implementation is that it doesn't require to install and run third party system (MySQL, redis etc...) to enable this app to work. This makes it more self contained and faster to get up and running which shouild make its evaluation easier.
+
+
 ## Installation & build
 clone this repo
 
@@ -189,19 +203,3 @@ DELETE /groups/admin
 ```
 
 Users member of the group _{groupname}_ get their _groups_ field updated to reflect the change.
-
-
-## Implementation details   
-The API is designed to support multiple data storage types. Since the data must be persistent, the assumption that:
-
-**_The app doesn't need to scale and there will always be a unique instance running at any given time_**
-
-was made for simplicity sake due to the local nature of datastore that is implemented. The use of systems such as a database or a key/pair service would alleviate this restriction.
-
-In this implementation, users and groups are kept in memory through a hash table (map).
-
-The data stays in memory as long as the app runs and is only saved at shutdown in a local file after being serialized. When the app restarts, It reloads the data from the saved file.
-
-The rationale for this implementation is that it doesn't require to install and run third party system (MySQL, redis etc...) to enable this app to work. This makes it more self contained and faster to get up and running which shouild make its evaluation easier.
-
-
