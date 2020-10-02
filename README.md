@@ -39,7 +39,7 @@ Endpoints of a given class use the same endpoint name, but require different htt
 These endpoints use **/users** as a name
 
 
-**GET /users/{userid}**     
+- **GET /users/{userid}**     
 Returns the matching user record or 404 if none exist.  
 
 ```text
@@ -47,7 +47,7 @@ GET /users/joes
 ```
 
 
-**POST /users**     
+- **POST /users**     
 Creates a new user record. The body of the request should be a valid user record. 
 
 ```text
@@ -64,7 +64,7 @@ POSTs to an existing user will return a 500 and the message _error user <userid>
 
 
 
-**DELETE /users/{userid}**   
+- **DELETE /users/{userid}**   
 Deletes a user record.  
 
 ```text
@@ -74,7 +74,7 @@ Returns 404 if the user doesn't exist.
 
 
 
-**PUT /users/{userid}**   
+- **PUT /users/{userid}**   
 Updates an existing user record. The body of the request should be a valid user record. 
 
 ```text
@@ -95,7 +95,7 @@ PUTs to a non-existent user should return a 404.
 These endpoints use **/groups** as a name
 
 
-**GET /groups/{groupname}**   
+- **GET /groups/{groupname}**   
 Returns a JSON list of the members of that group. 
 
 ```text
@@ -110,7 +110,7 @@ example of response:
 ```
 
 
-**POST /groups**   
+- **POST /groups**   
 Creates an empty group. 
 
 ```text
@@ -125,7 +125,7 @@ POST /groups
 POSTs to an existing group will generate a 500. The body should contain a name parameter:
 
 
-**PUT /groups/{groupname}**   
+- **PUT /groups/{groupname}**   
 Updates the membership list for the group. The body of the request should be a JSON list 
 describing the group's members. 
 
@@ -145,7 +145,7 @@ Group members of the old list which are not in the new list will have the group 
 Returns a 404 if the group does not exist
 
 
-**DELETE /groups/{groupname}**   
+- **DELETE /groups/{groupname}**   
 Deletes a group. 
 
 ```text
