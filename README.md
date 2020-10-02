@@ -1,6 +1,6 @@
 # Test assignment
 
-## Installation 
+## Installation & build
 clone this repo
 
 from the _planet_ folder, type
@@ -20,7 +20,7 @@ The app will show these messages:
 SIGTERM and SIGINT signals initialized!
 Waiting to shutdown
 ```
-It means that the SIGTERM and SIGINT signals have been captured to detect a shutdown and an appropriate action (save data to local file) will be taken when this happens.
+These messages mean that the SIGTERM and SIGINT signals have been captured to detect a shutdown and an appropriate action (save data to local file) will be taken when this happens.
 
 
 ## testing the app
@@ -30,6 +30,9 @@ type
 ```
 > go test -v
 ``` 
+
+Current tests only consider http status to determine whether a call succeeded or failed as expected. A deeper testing could be accomplished for endpoints returning a payload by also comparing their payload to what is expected. Due to time constraints to prepare scenarios that reflect a thorough testing, these features were left on the sideline.
+
 
 ## Introduction
 
@@ -168,7 +171,7 @@ PUT /groups/admin
 
 ```
 
-Group members of the old list which are not in the new list will have the group removed from their _groups_ field. Similarly, the group name is added for members of the new list that were not in the old list. The body should contain an array of userid.
+Group members of the old list which are not in the new list will have the group removed from their _groups_ field. Similarly, the group name is added for members of the new list that did not belong to the old list. The body should contain an array of userid.
 
 ```json
   ["userid1","userid2"]
@@ -189,16 +192,16 @@ Users member of the group _{groupname}_ get their _groups_ field updated to refl
 
 
 ## Implementation details   
-The API is designed to support multiple repository types without requiring to change the unit test code. Since the data must be persistent, the assumption that:
+The API is designed to support multiple data storage types. Since the data must be persistent, the assumption that:
 
 **_The app doesn't need to scale and there will always be a unique instance running at any given time_**
 
-was made for simplicity sake due to the local nature of datastore implemented. The use of systems such as a database or a key/pair service would aleviate this restriction.
+was made for simplicity sake due to the local nature of datastore that is implemented. The use of systems such as a database or a key/pair service would alleviate this restriction.
 
-The users and groups are kept in memory through a hash table (map).
+In this implementation, users and groups are kept in memory through a hash table (map).
 
-The data stays in memory as long as the app runs and is only saved at shutdown in a local file. When the app restarts, It reloads the data from the saved file.
+The data stays in memory as long as the app runs and is only saved at shutdown in a local file after being serialized. When the app restarts, It reloads the data from the saved file.
 
-The rationale for this implementation is that it doesn't require to install and run third party system (MySQL, redis etc...) to enable this app to work, thus making it faster to get it up and running.   
+The rationale for this implementation is that it doesn't require to install and run third party system (MySQL, redis etc...) to enable this app to work. This makes it more self contained and faster to get up and running which shouild make its evaluation easier.
 
 
