@@ -64,7 +64,7 @@ POSTs to an existing user will return a 500 and the message _error user <userid>
 
 
 
-**DELETE /users/{userid}**
+**DELETE /users/{userid}**   
 Deletes a user record.  
 
 ```text
@@ -74,7 +74,7 @@ Returns 404 if the user doesn't exist.
 
 
 
-**PUT /users/{userid}**
+**PUT /users/{userid}**   
 Updates an existing user record. The body of the request should be a valid user record. 
 
 ```text
@@ -91,11 +91,11 @@ PUTs to a non-existent user should return a 404.
 
 
 
-## groups class
+## groups class   
 These endpoints use **/groups** as a name
 
 
-**GET /groups/{groupname}**
+**GET /groups/{groupname}**   
 Returns a JSON list of the members of that group. 
 
 ```text
@@ -125,7 +125,7 @@ POST /groups
 POSTs to an existing group will generate a 500. The body should contain a name parameter:
 
 
-**PUT /groups/{groupname}**
+**PUT /groups/{groupname}**   
 Updates the membership list for the group. The body of the request should be a JSON list 
 describing the group's members. 
 
@@ -145,7 +145,7 @@ Group members of the old list which are not in the new list will have the group 
 Returns a 404 if the group does not exist
 
 
-**DELETE /groups/{groupname}**
+**DELETE /groups/{groupname}**   
 Deletes a group. 
 
 ```text
@@ -156,7 +156,7 @@ DELETE /groups/admin
 Users member of the group _{groupname}_ get their _groups_ field updated to reflect the change.
 
 
-## Implementation details
+## Implementation details   
 The API is designed to support multiple repository types without requiring to change the unit test code. Since the data must be persistent, the assumption that:
 
 - The app doesn't need to scale and there will always be a unique instance running at any given time.
