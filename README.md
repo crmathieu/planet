@@ -51,16 +51,16 @@ A user record can be represented in a JSON hash as follows:
 This API helps maintains information about a set of users and the groups they are members of. HTTP verbs are used to implicitly indicate what the intent is, whether it is about _users_ or _groups_:
 
 ### GET
-_GET_ is used to fetch information
+_GET_ is used to fetch data.
 
 ### POST
-_POST_ is used to add new information
+_POST_ is used to add new information.
 
 ### PUT
-_PUT_ is used for information updates
+_PUT_ is used for data updates.
 
 ### DELETE
-_DELETE_ is used to remove information
+_DELETE_ is used to remove information.
 
 
 An endpoint is characterized by its name and the http verb required for the call. Endpoints can be categorized in 2 classes: The **users** and **groups** classes. 
@@ -71,7 +71,7 @@ Endpoints of a given class use the same endpoint name, but require different htt
 # API
 
 ## users class
-These endpoints use **/users** as a name
+These endpoints use **/users** as a verb.
 
 
 - **GET /users/{userid}**     
@@ -127,7 +127,7 @@ PUTs to a non-existent user should return a 404.
 
 
 ## groups class   
-These endpoints use **/groups** as a name
+These endpoints use **/groups** as a verb.
 
 
 - **GET /groups/{groupname}**   
@@ -177,7 +177,7 @@ Group members of the old list which are not in the new list will have the group 
   ["userid1","userid2"]
 ```
 
-Returns a 404 if the group does not exist
+Returns a 404 if the group does not exist.
 
 
 - **DELETE /groups/{groupname}**   
