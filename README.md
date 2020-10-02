@@ -1,6 +1,34 @@
-# PLANET - Code test assignment
+# Test assignment
 
- 
+## Installation 
+- clone this repo
+- type
+```text
+> go build
+```
+
+## Running the app
+- type
+```text
+> ./planet
+```
+The app will show these messages:
+
+```text
+SIGTERM and SIGINT signals initialized!
+Waiting to shutdown
+```
+It means that the app can capture the SIGTERM and SIGINT signals to detect a shutdown and take appropriate action (save data to local file) when this happens.
+
+
+## testing the app
+- go to the _api_ subfolder
+- type
+```
+> go test -v
+``` 
+
+
 Implements a REST service used to store, fetch, and update user records. 
 A user record can be represented in a JSON hash like so: 
 
@@ -167,6 +195,6 @@ The users and groups are kept in memory through a hash table (map).
 
 The data stays in memory as long as the app runs and is only saved at shutdown in a local file. When the app restarts, It reloads the data from the saved file.
 
-The rationale for this implementation is that it doesn't require to install and run third party system (MySQL, redis etc...) to enable this app to work.   
+The rationale for this implementation is that it doesn't require to install and run third party system (MySQL, redis etc...) to enable this app to work, thus making it faster to get it up and running.   
 
 
