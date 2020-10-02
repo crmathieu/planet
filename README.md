@@ -27,14 +27,16 @@ _PUT_ is used for information updates
 ### DELETE
 _DELETE_ is used to remove a user or a group
 
-An endpoint is characterized by its name and the http verb required for the call. 
 
-There are 2 classes of endpoints: The **users** class, and the **groups** class. 
+An endpoint is characterized by its name and the http verb required for the call. Endpoints can be categorized in 2 classes: The **users** and **groups** classes. 
+
+Endpoints of a given class use the same endpoint name, but require different http method so that they can be differentiated.
 
 ## API
 The service should provide the following endpoints and semantics: 
 
 ### users class
+These endpoints use **/users** as a name
 
 **GET /users/{userid}**     
 Returns the matching user record or 404 if none exist.  
@@ -53,6 +55,7 @@ a non-existent user should return a 404.
 
 
 ### groups class
+These endpoints use **/groups** as a name
 
 **GET /groups/{groupname}**
 Returns a JSON list of user ids containing the members of that group. Returns a 404 
@@ -88,10 +91,10 @@ Deletes a group. Users member of the group get their _groups_ information update
 
 
 ## Implementation
-The API is design to allow for multiple type of repositories without requiring to change the unit test code. For simplicity and since the data must be persistent, I made the following assumptions: 
+The API is designed to support multiple repository types without requiring to change the unit test code. For simplicity and since the data must be persistent, I made the following assumptions: 
 
 - The app doesn't need to scale and there will always be a unique instance running at any given time.
-- I keep data in-memory and save it at shutdown in a local file. When the app restarts, It reloads the data from the save file.
+- The data stays in memory as long as the app runs and is only saved at shutdown in a local file. When the app restarts, It reloads the data from the saved file.
 
 
 Implementation Notes: 
