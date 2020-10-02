@@ -36,7 +36,7 @@ The service should provide the following endpoints and semantics:
 
 ### users class
 
-**GET /users/<userid>**     
+**GET /users/{userid}**     
 Returns the matching user record or 404 if none exist.  
 
 
@@ -44,17 +44,17 @@ Returns the matching user record or 404 if none exist.
 Creates a new user record. The body of the request should be a valid user record. POSTs to an 
 existing user will return a 500 and the message _error user <userid> already exists_.
 
-**DELETE /users/<userid>**
+**DELETE /users/{userid}**
 Deletes a user record. Returns 404 if the user doesn't exist.  
 
-**PUT /users/<userid>**
+**PUT /users/{userid}**
 Updates an existing user record. The body of the request should be a valid user record. PUTs to 
 a non-existent user should return a 404.  
 
 
 ### groups class
 
-**GET /groups/<groupname>**
+**GET /groups/{groupname}**
 Returns a JSON list of user ids containing the members of that group. Returns a 404 
 if the group doesn't exist.
 
@@ -73,7 +73,7 @@ with the appropriate HTTP status code. The body should contain a name parameter:
 }
 ``` 
 
-**PUT /groups/<groupname>**
+**PUT /groups/{groupname}**
 Updates the membership list for the group. The body of the request should be a JSON list 
 describing the group's members. The group name is removed for members of the old list but not in 
 the new one. Similarly, the group name is added for members of the new group that were not in the old list.
@@ -83,7 +83,7 @@ The body should contain an array of userid.
   ["userid1","userid2"]
 ```
 
-**DELETE /groups/<groupname>**
+**DELETE /groups/{groupname}**
 Deletes a group. Users member of the group get their _groups_ information updated to reflect the change.
 
 
