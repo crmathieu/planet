@@ -9,7 +9,8 @@ from the _planet_ folder, type
 ```
 
 ## Running the app
-type
+The app serves client requests on port 80. 
+To start the app, type
 ```text
 > ./planet
 ```
@@ -19,11 +20,12 @@ The app will show these messages:
 SIGTERM and SIGINT signals initialized!
 Waiting to shutdown
 ```
-It means that the app can capture the SIGTERM and SIGINT signals to detect a shutdown and take appropriate action (save data to local file) when this happens.
+It means that the SIGTERM and SIGINT signals have been captured to detect a shutdown and an appropriate action (save data to local file) will be taken when this happens.
 
 
 ## testing the app
-go to the _api_ subfolder
+In one terminal, run the app. 
+In a second terminal, go to the _api_ subfolder
 type
 ```
 > go test -v
