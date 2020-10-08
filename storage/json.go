@@ -198,21 +198,17 @@ func (js JsonStorage) UserUpdate(w http.ResponseWriter, r *http.Request, userid 
 // GET method - returns the group's members list
 // ----------------------------------------------------------------------------
 func (js JsonStorage) GroupGet(w http.ResponseWriter, r *http.Request, groupname string)  {
-	if groupname != "" {
-		JRepo.uLock.RLock()
-		defer JRepo.uLock.RUnlock() 
-		if grp, ok := JRepo.js.Repogrp[groupname]; ok {
-			body, mok := json.Marshal(grp)
-			if mok == nil {
-				data.ServerResponse(w, r, http.StatusOK, body)
-			} else {
-				data.ServerResponse(w, r, http.StatusInternalServerError, []byte(http.StatusText(http.StatusInternalServerError)))
-			}
+	JRepo.uLock.RLock()
+	defer JRepo.uLock.RUnlock() 
+	if grp, ok := JRepo.js.Repogrp[groupname]; ok {
+		body, mok := json.Marshal(grp)
+		if mok == nil {
+			data.ServerResponse(w, r, http.StatusOK, body)
 		} else {
-			data.ServerResponse(w, r, http.StatusNotFound, []byte(http.StatusText(http.StatusNotFound)))
+			data.ServerResponse(w, r, http.StatusInternalServerError, []byte(http.StatusText(http.StatusInternalServerError)))
 		}
 	} else {
-		data.ServerResponse(w, r, http.StatusBadRequest, []byte(http.StatusText(http.StatusBadRequest)))
+		data.ServerResponse(w, r, http.StatusNotFound, []byte(http.StatusText(http.StatusNotFound)))
 	}
 }
 

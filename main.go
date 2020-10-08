@@ -26,10 +26,10 @@ func router(w http.ResponseWriter, r *http.Request) {
 	tokens := strings.Split(r.URL.String(), "/") 
 	id := ""
 	if len(tokens) > 2 {
-		// 3rd token id the id
+		// 3rd token is the id
 		id = tokens[2]
 	} 
-	// 2nd token is endp
+	// 2nd token is the endpoint family
 	if fc, ok := routes[tokens[1]]; ok {
 		// endpoint family recognized. Call it!
 		fc(w, r, id)

@@ -108,7 +108,7 @@ func GroupGetWrapper(w http.ResponseWriter, r *http.Request, id string) {
 	if id != "" {
 		(*Strg).GroupGet(w, r, id)
 	} else {
-		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid"))
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing groupname"))
 	}
 }
 
@@ -119,7 +119,7 @@ func GroupDeleteWrapper(w http.ResponseWriter, r *http.Request, id string) {
 	if id != "" {
 		(*Strg).GroupDelete(w, r, id)
 	} else {
-		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid"))
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing groupname"))
 	}
 }
 
