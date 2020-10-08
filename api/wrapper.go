@@ -30,7 +30,11 @@ func CloseStorage(storageType string) {
 // Get method - calls storage specific user get
 // ----------------------------------------------------------------------------
 func UserGetWrapper(w http.ResponseWriter, r *http.Request, id string) {
-	(*Strg).UserGet(w, r, id)
+	if id != "" {
+		(*Strg).UserGet(w, r, id)
+	} else {
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid"))
+	}
 }
 
 // UserAddWrapper -------------------------------------------------------------
@@ -59,7 +63,11 @@ func UserAddWrapper(w http.ResponseWriter, r *http.Request, dummy string) {
 // DELETE method - calls storage specific user delete
 // ----------------------------------------------------------------------------
 func UserDeleteWrapper(w http.ResponseWriter, r *http.Request, id string) {
-	(*Strg).UserDelete(w, r, id)
+	if id != "" {
+		(*Strg).UserDelete(w, r, id)
+	} else {
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid"))
+	}
 }
 
 // UserUpdateWrapper ----------------------------------------------------------
@@ -85,7 +93,7 @@ func UserUpdateWrapper(w http.ResponseWriter, r *http.Request, id string) {
 
 		(*Strg).UserUpdate(w, r, id, &user)
 	} else {
-		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid not found"))
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid"))
 	}
 }
 
@@ -97,14 +105,22 @@ func UserUpdateWrapper(w http.ResponseWriter, r *http.Request, id string) {
 // GET method - calls storage specific group get
 // ----------------------------------------------------------------------------
 func GroupGetWrapper(w http.ResponseWriter, r *http.Request, id string) {
-	(*Strg).GroupGet(w, r, id)
+	if id != "" {
+		(*Strg).GroupGet(w, r, id)
+	} else {
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid"))
+	}
 }
 
 // GroupDeleteWrapper ----------------------------------------------------------
 // DELETE method - calls storage specific group delete
 // ----------------------------------------------------------------------------
 func GroupDeleteWrapper(w http.ResponseWriter, r *http.Request, id string) {
-	(*Strg).GroupDelete(w, r, id)
+	if id != "" {
+		(*Strg).GroupDelete(w, r, id)
+	} else {
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid"))
+	}
 }
 
 // GroupUpdateWrapper ----------------------------------------------------------
