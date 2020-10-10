@@ -31,6 +31,7 @@ When a user is added or updated, it is assumed that the payload is valid; more s
 ```
 
 - Build
+
 from the _planet_ folder, type
 ```text
 > go build
