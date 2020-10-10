@@ -18,16 +18,26 @@ When a user is added or updated, it is assumed that the payload is valid; more s
 
 
 ## Installation & build
-clone this repo
 
+- Create a folder 
+```text
+> mkdir -p $HOME/go/src/github.com/crmathieu
+> cd $HOME/go/src/github/crmathieu
+```
+
+- Clone the repo
+```text
+> git clone https://github.com/crmathieu/planet.git
+```
+
+- Build
 from the _planet_ folder, type
 ```text
 > go build
 ```
 
 ## Running the app
-The app serves client requests on port 80. 
-To start the app, type
+The app serves client requests on port 80. To start the app, type
 ```text
 > ./planet
 ```
@@ -42,9 +52,8 @@ These messages mean that the SIGTERM and SIGINT signals have been captured to de
 
 ## Testing the app
 In one terminal, run the app. 
-In a second terminal, go to the _api_ subfolder
-type
-```
+In a second terminal, go to the _api_ subfolder and type:
+```text
 > go test -v
 ``` 
 
