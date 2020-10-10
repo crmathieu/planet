@@ -9,7 +9,7 @@ In this implementation, users and groups are kept in memory through a hash table
 
 The data stays in memory as long as the app runs and is only saved at shutdown in a local file after being serialized. When the app restarts, It reloads the data from the saved file.
 
-The rationale for this implementation is that it doesn't require to install and run third party system (MySQL, redis etc...), or to download additional go packages to enable this app to work. This makes it more self contained and faster to get up and running which shouild make its evaluation easier.
+The rationale for this implementation is that it doesn't require to install and run third party system (MySQL, redis etc...), and download additional go packages to enable this app to work. This makes it more self contained and faster to get up and running which shouild make its evaluation easier.
 
 
 ## Other assumptions
