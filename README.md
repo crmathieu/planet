@@ -1,9 +1,9 @@
 # Test assignment
 
 ## Implementation details   
-The API is designed to support multiple data storage types. Since the data must be persistent, the assumption was made that: **_The app doesn't need to scale and there will always be a unique instance running at any given time_**.
+The API is designed to support multiple data storage types. Since the data needs to be persistent, this implementation assumes that: **_The app doesn't need to scale and there will always be a unique instance running at any given time_**.
 
-This is for simplicity sake due to the local nature of datastore that is implemented. The use of a datastore with systems such as a database or a key/pair service would alleviate this restriction.
+This is for simplicity sake due to the local nature of datastore that is implemented. Using datastores such as a database or a key/pair service would alleviate this restriction.
 
 In this implementation, users and groups are kept in memory through a hash table (map).
 
