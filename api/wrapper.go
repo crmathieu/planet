@@ -33,7 +33,7 @@ func UserGetWrapper(w http.ResponseWriter, r *http.Request, id string) {
 	if id != "" {
 		(*Strg).UserGet(w, r, id)
 	} else {
-		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid"))
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, data.STRING_DATA, "missing userid")
 	}
 }
 
@@ -46,14 +46,14 @@ func UserAddWrapper(w http.ResponseWriter, r *http.Request, dummy string) {
 
 	plBytes, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		data.ServerResponse(w, r, http.StatusInternalServerError, []byte(fmt.Sprintf("Error extracting payload from request body: %s", err.Error())))
+		data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, fmt.Sprintf("Error extracting payload from request body: %s", err.Error()))
 		return
 	}
 
 	var user data.USER
 	err = json.Unmarshal(plBytes, &user)
 	if err != nil {
-		data.ServerResponse(w, r, http.StatusInternalServerError, []byte(fmt.Sprintf("Error unmarshalling payload - %s\nPAYLOAD=%s\n", err.Error(), string(plBytes))))
+		data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, fmt.Sprintf("Error unmarshalling payload - %s\nPAYLOAD=%s\n", err.Error(), string(plBytes)))
 		return
 	}
 	(*Strg).UserAdd(w, r, &user)
@@ -66,7 +66,7 @@ func UserDeleteWrapper(w http.ResponseWriter, r *http.Request, id string) {
 	if id != "" {
 		(*Strg).UserDelete(w, r, id)
 	} else {
-		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid"))
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, data.STRING_DATA, "missing userid")
 	}
 }
 
@@ -80,20 +80,20 @@ func UserUpdateWrapper(w http.ResponseWriter, r *http.Request, id string) {
 	if id != "" {
 		plBytes, err := ioutil.ReadAll(r.Body)
 		if err != nil {
-			data.ServerResponse(w, r, http.StatusInternalServerError, []byte(fmt.Sprintf("Error extracting payload from request body: %s", err.Error())))
+			data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, fmt.Sprintf("Error extracting payload from request body: %s", err.Error()))
 			return
 		}
 
 		var user data.USER
 		err = json.Unmarshal(plBytes, &user)
 		if err != nil {
-			data.ServerResponse(w, r, http.StatusInternalServerError, []byte(fmt.Sprintf("Error unmarshalling payload - %s\nPAYLOAD=%s\n", err.Error(), string(plBytes))))
+			data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, fmt.Sprintf("Error unmarshalling payload - %s\nPAYLOAD=%s\n", err.Error(), string(plBytes)))
 			return
 		}
 
 		(*Strg).UserUpdate(w, r, id, &user)
 	} else {
-		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing userid"))
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, data.STRING_DATA, "missing userid")
 	}
 }
 
@@ -108,7 +108,7 @@ func GroupGetWrapper(w http.ResponseWriter, r *http.Request, id string) {
 	if id != "" {
 		(*Strg).GroupGet(w, r, id)
 	} else {
-		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing groupname"))
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, data.STRING_DATA, "missing groupname")
 	}
 }
 
@@ -119,7 +119,7 @@ func GroupDeleteWrapper(w http.ResponseWriter, r *http.Request, id string) {
 	if id != "" {
 		(*Strg).GroupDelete(w, r, id)
 	} else {
-		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing groupname"))
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, data.STRING_DATA, "missing groupname")
 	}
 }
 
@@ -131,20 +131,20 @@ func GroupUpdateWrapper(w http.ResponseWriter, r *http.Request, id string) {
 	if id != "" {
 		plBytes, err := ioutil.ReadAll(r.Body)
 		if err != nil {
-			data.ServerResponse(w, r, http.StatusInternalServerError, []byte(fmt.Sprintf("Error extracting payload from request body: %s", err.Error())))
+			data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, fmt.Sprintf("Error extracting payload from request body: %s", err.Error()))
 			return
 		}
 
 		var grpupd data.GROUPUPD
 		err = json.Unmarshal(plBytes, &grpupd.Members)
 		if err != nil {
-			data.ServerResponse(w, r, http.StatusInternalServerError, []byte(fmt.Sprintf("Error unmarshalling payload - %s\nPAYLOAD=%s\n", err.Error(), string(plBytes))))
+			data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, fmt.Sprintf("Error unmarshalling payload - %s\nPAYLOAD=%s\n", err.Error(), string(plBytes)))
 			return
 		}
 
 		(*Strg).GroupUpdate(w, r, id, &grpupd)
 	} else {
-		data.ServerResponse(w, r, http.StatusUnprocessableEntity, []byte("missing groupname"))
+		data.ServerResponse(w, r, http.StatusUnprocessableEntity, data.STRING_DATA, "missing groupname")
 	}
 }
 
@@ -157,14 +157,14 @@ func GroupAddWrapper(w http.ResponseWriter, r *http.Request, dummy string) {
 
 	plBytes, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		data.ServerResponse(w, r, http.StatusInternalServerError, []byte(fmt.Sprintf("Error extracting payload from request body: %s", err.Error())))
+		data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, fmt.Sprintf("Error extracting payload from request body: %s", err.Error()))
 		return
 	}
 
 	var group data.GROUP
 	err = json.Unmarshal(plBytes, &group)
 	if err != nil {
-		data.ServerResponse(w, r, http.StatusInternalServerError, []byte(fmt.Sprintf("Error unmarshalling payload - %s\nPAYLOAD=%s\n", err.Error(), string(plBytes))))
+		data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, fmt.Sprintf("Error unmarshalling payload - %s\nPAYLOAD=%s\n", err.Error(), string(plBytes)))
 		return
 	}
 	(*Strg).GroupAdd(w, r, &group)

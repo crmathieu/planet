@@ -117,15 +117,15 @@ func (js JsonStorage) UserGet(w http.ResponseWriter, r *http.Request, userid str
 		if u, ok := JRepo.js.Repo[userid]; ok {
 			body, mok := json.Marshal(u)
 			if mok == nil {
-				data.ServerResponse(w, r, http.StatusOK, body)
+				data.ServerResponse(w, r, http.StatusOK, data.JSON_DATA, string(body))
 			} else {
-				data.ServerResponse(w, r, http.StatusInternalServerError, []byte(http.StatusText(http.StatusInternalServerError)))
+				data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, http.StatusText(http.StatusInternalServerError))
 			}
 		} else {
-			data.ServerResponse(w, r, http.StatusNotFound, []byte(http.StatusText(http.StatusNotFound)))
+			data.ServerResponse(w, r, http.StatusNotFound, data.STRING_DATA, http.StatusText(http.StatusNotFound))
 		}
 	} else {
-		data.ServerResponse(w, r, http.StatusBadRequest, []byte(http.StatusText(http.StatusBadRequest)))
+		data.ServerResponse(w, r, http.StatusBadRequest, data.STRING_DATA, http.StatusText(http.StatusBadRequest))
 	}
 }
 
@@ -143,9 +143,9 @@ func (js JsonStorage) UserAdd(w http.ResponseWriter, r *http.Request, user *data
 		for _, v := range user.Groups {
 			JRepo.js.Repogrp[v] = append(JRepo.js.Repogrp[v], user.UID) 
 		}
-		data.ServerResponse(w, r, http.StatusOK, []byte("User added successfully"))
+		data.ServerResponse(w, r, http.StatusOK, data.STRING_DATA, "User added successfully")
 	} else {
-		data.ServerResponse(w, r, http.StatusInternalServerError, []byte("Error user "+user.UID+" already exists"))
+		data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, "Error user "+user.UID+" already exists")
 	}
 }
 
@@ -161,13 +161,13 @@ func (js JsonStorage) UserDelete(w http.ResponseWriter, r *http.Request, userid 
 				removeItem(v, userid)
 			}
 			delete(JRepo.js.Repo, userid)
-			data.ServerResponse(w, r, http.StatusOK, []byte("User "+userid+" was sucessfully deleted"))
+			data.ServerResponse(w, r, http.StatusOK, data.STRING_DATA, "User "+userid+" was sucessfully deleted")
 		} else {
-			data.ServerResponse(w, r, http.StatusNotFound, []byte(http.StatusText(http.StatusNotFound)))
+			data.ServerResponse(w, r, http.StatusNotFound, data.STRING_DATA, http.StatusText(http.StatusNotFound))
 		}
 		
 	} else {
-		data.ServerResponse(w, r, http.StatusBadRequest, []byte(http.StatusText(http.StatusBadRequest)))
+		data.ServerResponse(w, r, http.StatusBadRequest, data.STRING_DATA, http.StatusText(http.StatusBadRequest))
 	}
 }
 
@@ -188,9 +188,9 @@ func (js JsonStorage) UserUpdate(w http.ResponseWriter, r *http.Request, userid 
 		for _, v := range user.Groups {
 			JRepo.js.Repogrp[v] = append(JRepo.js.Repogrp[v], user.UID) 
 		}
-		data.ServerResponse(w, r, http.StatusOK, []byte("User "+userid+" was updated successfully"))
+		data.ServerResponse(w, r, http.StatusOK, data.STRING_DATA, "User "+userid+" was updated successfully")
 	} else {
-		data.ServerResponse(w, r, http.StatusNotFound, []byte(http.StatusText(http.StatusNotFound)))
+		data.ServerResponse(w, r, http.StatusNotFound, data.STRING_DATA, http.StatusText(http.StatusNotFound))
 	}
 }
 
@@ -203,12 +203,12 @@ func (js JsonStorage) GroupGet(w http.ResponseWriter, r *http.Request, groupname
 	if grp, ok := JRepo.js.Repogrp[groupname]; ok {
 		body, mok := json.Marshal(grp)
 		if mok == nil {
-			data.ServerResponse(w, r, http.StatusOK, body)
+			data.ServerResponse(w, r, http.StatusOK, data.JSON_DATA, string(body))
 		} else {
-			data.ServerResponse(w, r, http.StatusInternalServerError, []byte(http.StatusText(http.StatusInternalServerError)))
+			data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, http.StatusText(http.StatusInternalServerError))
 		}
 	} else {
-		data.ServerResponse(w, r, http.StatusNotFound, []byte(http.StatusText(http.StatusNotFound)))
+		data.ServerResponse(w, r, http.StatusNotFound, data.STRING_DATA, http.StatusText(http.StatusNotFound))
 	}
 }
 
@@ -221,12 +221,12 @@ func (js JsonStorage) GroupAdd(w http.ResponseWriter, r *http.Request, group *da
 		defer JRepo.uLock.Unlock() 
 		if _, ok := JRepo.js.Repogrp[group.Gname]; !ok {
 			JRepo.js.Repogrp[group.Gname] = []string{}
-			data.ServerResponse(w, r, http.StatusOK, []byte("Group "+group.Gname+" added successfully"))
+			data.ServerResponse(w, r, http.StatusOK, data.STRING_DATA, "Group "+group.Gname+" added successfully")
 		} else {
-			data.ServerResponse(w, r, http.StatusInternalServerError, []byte("Group "+group.Gname+" already exists"))
+			data.ServerResponse(w, r, http.StatusInternalServerError, data.STRING_DATA, "Group "+group.Gname+" already exists")
 		}
 	} else {
-		data.ServerResponse(w, r, http.StatusBadRequest, []byte(http.StatusText(http.StatusBadRequest)))
+		data.ServerResponse(w, r, http.StatusBadRequest, data.STRING_DATA, http.StatusText(http.StatusBadRequest))
 	}
 }
 
@@ -244,12 +244,12 @@ func (js JsonStorage) GroupDelete(w http.ResponseWriter, r *http.Request, groupn
 			}
 			// then remove group name from map
 			delete(JRepo.js.Repogrp, groupname)
-			data.ServerResponse(w, r, http.StatusOK, []byte("Group "+groupname+" successfully deleted"))
+			data.ServerResponse(w, r, http.StatusOK, data.STRING_DATA, "Group "+groupname+" successfully deleted")
 		} else {
-			data.ServerResponse(w, r, http.StatusNotFound, []byte(http.StatusText(http.StatusNotFound)))
+			data.ServerResponse(w, r, http.StatusNotFound, data.STRING_DATA, http.StatusText(http.StatusNotFound))
 		}
 	} else {
-		data.ServerResponse(w, r, http.StatusBadRequest, []byte(http.StatusText(http.StatusBadRequest)))
+		data.ServerResponse(w, r, http.StatusBadRequest, data.STRING_DATA, http.StatusText(http.StatusBadRequest))
 	}
 }
 
@@ -308,11 +308,11 @@ func (js JsonStorage)GroupUpdate(w http.ResponseWriter, r *http.Request, groupna
 			}
 			// ... and replace old set with new one
 			JRepo.js.Repogrp[groupname] = grpupd.Members
-			data.ServerResponse(w, r, http.StatusOK, []byte("Group "+groupname+" was successfully updated"))
+			data.ServerResponse(w, r, http.StatusOK, data.STRING_DATA, "Group "+groupname+" was successfully updated")
 		} else {
-			data.ServerResponse(w, r, http.StatusNotAcceptable, []byte(http.StatusText(http.StatusNotAcceptable)))
+			data.ServerResponse(w, r, http.StatusNotAcceptable, data.STRING_DATA, http.StatusText(http.StatusNotAcceptable))
 		}
 	} else {
-		data.ServerResponse(w, r, http.StatusBadRequest, []byte(http.StatusText(http.StatusBadRequest)))
+		data.ServerResponse(w, r, http.StatusBadRequest, data.STRING_DATA, http.StatusText(http.StatusBadRequest))
 	}
 }
