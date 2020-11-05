@@ -21,6 +21,10 @@ type JsonRepo struct {
 	js JsonStorage
 }
 
+type JsonLastRepo struct {
+	LastRepo string `json:"lastrepo"`
+}
+
 var JRepo JsonRepo
 
 // Init -----------------------------------------------------------------------
@@ -53,7 +57,9 @@ func saveRepoToDisk() {
 			return
 		}
 		defer fh.Close()
-		_, err = fh.Write([]byte(fn))
+		var repoLast = JsonLastRepo{LastRepo: fn}
+		out, _ := json.Marshal(repoLast) 
+		_, err = fh.Write(out)
 		if err != nil {
 			fmt.Println("** Could not update index to repository:",err.Error(),"**")
 			return
@@ -69,20 +75,23 @@ func saveRepoToDisk() {
 	// when everything goes well, remove previous storage:
 	err = os.Remove("storage/repository/"+JRepo.LastRepoName) 
     if err != nil { 
-		fmt.Println("** Could remove older repository:",err.Error(),"**")
+		fmt.Println("** Could not remove older repository:",err.Error(),"**")
 		return
     } 
 }
 
 // loadRepoFromDisk - load data -----------------------------------------------
 func loadRepoFromDisk() bool {
-    fn, err := ioutil.ReadFile("storage/repository/last.txt")
+    fnBytes, err := ioutil.ReadFile("storage/repository/last.txt")
 	if err != nil {
 		fmt.Println("** Could not update index to repository:",err.Error(),"**")
 		return false
 	}
+	var fn JsonLastRepo
+	err = json.Unmarshal(fnBytes, &fn)
 	var body []byte
-	body, err = ioutil.ReadFile("storage/repository/"+string(fn))
+	fmt.Println("----",fn.LastRepo)
+	body, err = ioutil.ReadFile("storage/repository/"+fn.LastRepo) //string(fn))
 	if err !=  nil {
 		fmt.Println("** Could not read last repository:",fn,"- error:",err.Error(),"**")
 		return false
@@ -93,7 +102,7 @@ func loadRepoFromDisk() bool {
 		fmt.Println("Error unmarshalling last repo backup:", fn, "- error", err.Error())
 		return false
 	} 
-	JRepo.LastRepoName = string(fn)
+	JRepo.LastRepoName = string(fn.LastRepo)
 	return true
 }
 
